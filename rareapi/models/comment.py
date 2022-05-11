@@ -1,0 +1,8 @@
+from django.db import models
+
+
+class Comment(models.Model):
+    post_id = models.ForeignKey("post", on_delete=models.CASCADE)
+    author_id = models.ForeignKey("author", on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_on = models.DateTimeField(auto_now_add=True)

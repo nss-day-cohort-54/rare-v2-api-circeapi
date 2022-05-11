@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rareapi.comment",
+        "pk": 1,
+        "fields": {
+            "post_id": 1,
+            "author_id": 2,
+            "content": "This game rocked my socks clean off mybruhbruh",
+            "created_on": "2020-08-29T13:24:27.172Z"
+        }
+    },
+    {
+        "model": "rareapi.comment",
+        "pk": 2,
+        "fields": {
+            "post_id": 1,
+            "author_id": 1,
+            "content": "I would rather sit in a puddle and cry than play this game",
+            "created_on": "2020-07-29T13:24:27.172Z"
+        }
+    }
+    
+]
