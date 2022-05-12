@@ -31,10 +31,13 @@ class CommentView(ViewSet):
             Response -- JSON serialized comment instance
         """
         author = Author.objects.get(user=request.auth.user)
-        
-        serializer = CreateCommentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(author=author)
+        comment = Comment.objects.create(
+            content = request.data['content'],
+            author = author,
+            post_id = request.data['post_id']
+        )
+        serializer = CreateCommentSerializer(comment)
+        # serializer.is_valid(raise_exception=True)
     
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
@@ -73,4 +76,4 @@ class CommentSerializer(serializers.ModelSerializer):
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['content', 'post_id']
+        fields = ['content', 'post']
