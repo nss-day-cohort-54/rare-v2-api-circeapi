@@ -6,7 +6,51 @@
             "title": "The First Post",
             "content": "This is some content for my first post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
-            "user": 1,
+            "author": 1,
+            "category": 1
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 2,
+        "fields": {
+            "title": "The Second Post",
+            "content": "This is some content for my second post to test.",
+            "publication_date": "2022-01-15T20:00:42.874Z",
+            "author": 2,
+            "category": 1
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 3,
+        "fields": {
+            "title": "The Third Post",
+            "content": "This is some content for my third post to test.",
+            "publication_date": "2022-01-15T20:00:42.874Z",
+            "author": 5,
+            "category": 1
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 4,
+        "fields": {
+            "title": "The Fourth Post",
+            "content": "This is some content for my fourth post to test.",
+            "publication_date": "2022-01-15T20:00:42.874Z",
+            "author": 5,
+            "category": 1
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 5,
+        "fields": {
+            "title": "The Fifth Post",
+            "content": "This is some content for my fifth post to test.",
+            "publication_date": "2022-02-15T20:00:42.874Z",
+            "author": 5,
             "category": 1
         }
     }
