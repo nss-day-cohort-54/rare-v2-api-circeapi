@@ -17,7 +17,7 @@ class PostView(ViewSet):
         user_id = self.request.query_params.get("user_id", None)
 
         if user_id == None : 
-            posts = Post.objects.all()
+            posts = Post.objects.all().order_by('-publication_date')
             
         else :    
             posts = Post.objects.filter(
