@@ -1,19 +1,29 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.db.models.functions import Coalesce
 from django.http import HttpResponseServerError
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from datetime import datetime
-from rareapi.models import Post, Author
+from rareapi.models import Post, Author, Category
 
 class PostView(ViewSet):
     
     def list(self, request):
 
-        posts = Post.objects.all()
-        user = Author.objects.get(user=request.auth.user)
+        user_id = self.request.query_params.get("user_id", None)
+
+        if user_id == None : 
+            posts = Post.objects.all()
+            
+        else :    
+            posts = Post.objects.filter(
+                Q(author = user_id)).order_by('-publication_date')
+                
+        
 
         serializer = PostSerializer(
             posts, many=True, context={'request': request})
@@ -43,13 +53,21 @@ class PostAuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['id', 'user']
+        
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ('id', 'label')        
 
         
 class PostSerializer(serializers.ModelSerializer):
     
-    user = PostAuthorSerializer(many=False)
+    author = PostAuthorSerializer(many=False)
+    category = CategorySerializer(many=False)
 
     class Meta:
         model = Post
-        fields = ('id', 'user', 'title', 'content', 'publication_date')
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category')
         
