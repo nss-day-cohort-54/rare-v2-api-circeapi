@@ -4,7 +4,7 @@ from .category import Category
 from .tag import Tag
 
 class Post(models.Model):
-    user = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="posts")
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="posts")
     title = models.CharField(max_length=50)
 #    header_image = models.ImageField(upload_to="postimages")
     content = models.TextField()

@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import include
 from rest_framework import routers
-from rareapi.views import register_user, login_user, PostView, CategoryView, CommentView, TagView
+from rareapi.views import register_user, login_user, PostView, CategoryView, CommentView, TagView, AuthorView, UserView
 
 router = routers.DefaultRouter(trailing_slash=False)
 
@@ -28,6 +28,8 @@ router.register(r'comments', CommentView, 'comment')
 router.register(r'categories', CategoryView, 'category')
 router.register(r'posts', PostView, 'post')
 router.register(r'tags', TagView, 'tag')
+router.register(r'authors', AuthorView, 'author')
+router.register(r'users', UserView, 'user')
 
 
 urlpatterns = [

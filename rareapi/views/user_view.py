@@ -4,20 +4,20 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Author
+from django.contrib.auth.models import User
 
 
-class AuthorView(ViewSet):
+class UserView(ViewSet):
     
     def list(self, request):
-        author = Author.objects.get(user=request.auth.user)
+        user = request.auth.user
         
-        serializer = AuthorSerializer(author)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
-class AuthorSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
     class Meta:
-        model = Author
-        fields = ('id', 'user')
+        model = User
+        fields = ('id',)
         depth = 1
