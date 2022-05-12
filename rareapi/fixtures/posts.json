@@ -1,0 +1,12 @@
+[
+    {
+        "model": "rareapi.post",
+        "pk": 1,
+        "fields": {
+            "title": "The First Post",
+            "content": "This is some content for my first post to test.",
+            "publication_date": "2022-01-15T20:00:42.874Z",
+            "author": 1
+        }
+    }
+]
