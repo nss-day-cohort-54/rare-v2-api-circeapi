@@ -19,10 +19,12 @@ from rest_framework import routers
 from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import include
-from rareapi.views import register_user, login_user, CategoryView
+from rareapi.views import register_user, login_user, CategoryView, TagView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
+
+router.register(r'tags', TagView, 'tag')
 
 
 urlpatterns = [
