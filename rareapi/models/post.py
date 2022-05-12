@@ -1,5 +1,7 @@
 from django.db import models
 from .author import Author
+from .category import Category
+from .tag import Tag
 
 class Post(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="posts")
@@ -7,4 +9,5 @@ class Post(models.Model):
 #    header_image = models.ImageField(upload_to="postimages")
     content = models.TextField()
     publication_date = models.DateTimeField(auto_now_add=True)
-#    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
+    tag = models.ManyToManyField(Tag, related_name="posttag")
