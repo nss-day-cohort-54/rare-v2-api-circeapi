@@ -5,6 +5,7 @@ from rest_framework import serializers, status
 from rareapi.models.author import Author
 
 from rareapi.models.comment import Comment
+from rareapi.models.post import Post
 
 class CommentView(ViewSet):
     """Level up game comments"""
@@ -27,7 +28,7 @@ class CommentView(ViewSet):
         """Handle POST operations
 
         Returns:
-            Response -- JSON serialized game instance
+            Response -- JSON serialized comment instance
         """
         author = Author.objects.get(user=request.auth.user)
         
@@ -39,18 +40,8 @@ class CommentView(ViewSet):
     
     # list handles queries
     def list(self, request):
-        """Handle GET requests to get all game types
-
-        Returns:
-            Response -- JSON serialized list of game types
-        """
-        comment = Comment.objects.all()
-        # check if string is a query ie /comment?type=1
-        game = request.query_params.get('game', None)
-        if game is not None:
-            comment = comment.filter(game_id=game)
-        
-        serializer = CommentSerializer(comment, many=True)
+        comments = Comment.objects.all()
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
     
     # added validation 
@@ -60,15 +51,15 @@ class CommentView(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        game = Game.objects.get(pk=pk)
-        serializer = CreateCommentSerializer(game, data=request.data)
+        comment = Comment.objects.get(pk=pk)
+        serializer = CreateCommentSerializer(comment, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
     
     def destroy(self, request, pk):
-        game = Game.objects.get(pk=pk)
-        game.delete()
+        comment = Comment.objects.get(pk=pk)
+        comment.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
         
 
@@ -77,11 +68,9 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Comment
-        fields = ('id', 'comment', 'game', 'gamer')
-        depth = 1
-        
+        fields = ('id', 'content', 'created_on', 'author_id', 'post_id')
 # validates and saves new game
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['id', 'review', 'game']
+        fields = ['content', 'post_id']

@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "post_id": 1,
-            "author_id": 2,
+            "author_id": 1,
             "content": "This game rocked my socks clean off mybruhbruh",
             "created_on": "2020-08-29T13:24:27.172Z"
         }
