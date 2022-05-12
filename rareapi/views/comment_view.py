@@ -37,7 +37,6 @@ class CommentView(ViewSet):
             post_id = request.data['post_id']
         )
         serializer = CreateCommentSerializer(comment)
-        # serializer.is_valid(raise_exception=True)
     
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
