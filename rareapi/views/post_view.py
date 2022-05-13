@@ -40,6 +40,29 @@ class PostView(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
         
+        
+        
+    def create(self, request):
+
+        user = Author.objects.get(user=request.auth.user)
+        category = Category.objects.get(pk=request.data["category"])
+        # publication_date = make_aware(datetime.strptime(request.data["publication_date"], '%Y-%m-%d'))
+
+        post = Post()
+        post.author = user
+        post.title = request.data["title"]
+        post.content = request.data["content"]
+        post.category = category
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+
+        try:
+            post.save()
+            serializer = PostSerializer(post, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except ValidationError as ex:
+            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)    
+        
     @action(methods=['post', 'delete'], detail=True)
     def tag(self, request, pk):
         """Post and Delete requests to add tags to a post"""
@@ -56,7 +79,6 @@ class PostView(ViewSet):
             response_message = Response({'message': 'Tag deleted'}, status=status.HTTP_204_NO_CONTENT)
         
         return response_message
-        
 
 class PostUserSerializer(serializers.ModelSerializer):
 
@@ -87,6 +109,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'tags')
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved', 'tags')
         depth = 1
         
