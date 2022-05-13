@@ -6,3 +6,4 @@ from .post_view import PostView
 from .comment_view import CommentView
 from .author_view import AuthorView
 from .user_view import UserView
+from .admin_view import AdminView

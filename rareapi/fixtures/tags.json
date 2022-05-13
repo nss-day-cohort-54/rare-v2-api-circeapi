@@ -1,0 +1,51 @@
+[
+    {
+        "model": "rareapi.tag",
+        "pk": 1,
+        "fields": {
+            "label":"Marvel"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 2,
+        "fields": {
+            "label":"Football"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 3,
+        "fields": {
+            "label":"Movies"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 4,
+        "fields": {
+            "label":"Video Games"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 5,
+        "fields": {
+            "label":"Board Games"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 6,
+        "fields": {
+            "label":"Hockey"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 7,
+        "fields": {
+            "label":"Baseball"
+        }
+    }
+]
