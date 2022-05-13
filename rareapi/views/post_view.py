@@ -49,10 +49,10 @@ class PostView(ViewSet):
         tag = request.data['tag']
         
         if request.method == "POST":
-            post.tag.add(tag)
+            post.tags.add(tag)
             response_message = Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
         elif request.method == 'DELETE':
-            post.tag.remove(tag)
+            post.tags.remove(tag)
             response_message = Response({'message': 'Tag deleted'}, status=status.HTTP_204_NO_CONTENT)
         
         return response_message
@@ -87,6 +87,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'tag')
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'tags')
         depth = 1
         
