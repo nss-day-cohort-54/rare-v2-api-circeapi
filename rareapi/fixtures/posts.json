@@ -7,7 +7,9 @@
             "content": "This is some content for my first post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
             "author": 1,
-            "category": 1
+            "category": 1,
+            "image_url": "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891758-001bulbasaur.png",
+            "approved": 1
         }
     },
     {
@@ -18,7 +20,9 @@
             "content": "This is some content for my second post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
             "author": 2,
-            "category": 1
+            "category": 1,
+            "image_url": "https://i.insider.com/57910997dd0895a56e8b4573?width=600&format=jpeg&auto=webp",
+            "approved": 1
         }
     },
     {
@@ -29,7 +33,9 @@
             "content": "This is some content for my third post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
             "author": 5,
-            "category": 1
+            "category": 1,
+            "image_url": "https://www.seekpng.com/png/detail/65-654254_pikachu-clipart-character-pokemon-cute-borders-vectors-pokemon.png",
+            "approved": 1
         }
     },
     {
@@ -40,7 +46,9 @@
             "content": "This is some content for my fourth post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
             "author": 5,
-            "category": 1
+            "category": 1,
+            "image_url": "https://i.insider.com/57910997dd0895a56e8b4570?width=600&format=jpeg&auto=webp",
+            "approved": 1
         }
     },
     {
@@ -51,7 +59,9 @@
             "content": "This is some content for my fifth post to test.",
             "publication_date": "2022-02-15T20:00:42.874Z",
             "author": 5,
-            "category": 1
+            "category": 1,
+            "image_url": "https://www.seekpng.com/png/detail/183-1834872_yahoo-image-search-results-pokemon-characters.png",
+            "approved": 1
         }
     }
 ]
