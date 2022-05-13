@@ -1,0 +1,31 @@
+[
+    {
+        "model": "rareapi.category",
+        "pk": 1,
+        "fields": {
+            "label": "Mystery"
+            
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Bromance"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 3,
+        "fields": {
+            "label": "Adventure"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 4,
+        "fields": {
+            "label": "Science"
+        }
+    }
+]
