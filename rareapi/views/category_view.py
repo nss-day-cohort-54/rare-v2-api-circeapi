@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareapi.models import Category
-
+from django.db.models import Q
 class CategoryView(ViewSet):
     """Rater app Category view"""
     
@@ -27,7 +27,7 @@ class CategoryView(ViewSet):
         Returns:
             Response -- JSON serialized list of categories
         """
-        categories = Category.objects.all()
+        categories = Category.objects.all().order_by('label')
         
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
