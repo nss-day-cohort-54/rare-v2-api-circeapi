@@ -8,6 +8,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from datetime import datetime
+from rest_framework.decorators import action
 from rareapi.models import Post, Author, Category
 
 class PostView(ViewSet):
@@ -39,6 +40,23 @@ class PostView(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
         
+    @action(methods=['post', 'delete'], detail=True)
+    def tag(self, request, pk):
+        """Post and Delete requests to add tags to a post"""
+        response_message = ""
+        
+        post = Post.objects.get(pk=pk)
+        tag = request.data['tag']
+        
+        if request.method == "POST":
+            post.tag.add(tag)
+            response_message = Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
+        elif request.method == 'DELETE':
+            post.tag.remove(tag)
+            response_message = Response({'message': 'Tag deleted'}, status=status.HTTP_204_NO_CONTENT)
+        
+        return response_message
+        
 
 class PostUserSerializer(serializers.ModelSerializer):
 
@@ -69,6 +87,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category',)
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'tag')
         depth = 1
         
