@@ -39,7 +39,11 @@ class PostView(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
         
-
+    def destroy(self, request, pk):
+        post = Post.objects.get(pk=pk)
+        post.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
 class PostUserSerializer(serializers.ModelSerializer):
 
     class Meta:
