@@ -55,9 +55,11 @@ class PostView(ViewSet):
         post.category = category
         post.image_url = request.data["image_url"]
         post.approved = request.data["approved"]
+        
 
         try:
             post.save()
+            post.tags.add(*request.data['tags'])
             serializer = PostSerializer(post, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
