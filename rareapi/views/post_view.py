@@ -44,6 +44,30 @@ class PostView(ViewSet):
         post.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
         
+        
+        
+    def create(self, request):
+
+        user = Author.objects.get(user=request.auth.user)
+        category = Category.objects.get(pk=request.data["category"])
+        # publication_date = make_aware(datetime.strptime(request.data["publication_date"], '%Y-%m-%d'))
+
+        post = Post()
+        post.author = user
+        post.title = request.data["title"]
+        post.content = request.data["content"]
+        post.category = category
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+
+        try:
+            post.save()
+            serializer = PostSerializer(post, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except ValidationError as ex:
+            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)    
+        
+
 class PostUserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -73,6 +97,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category',)
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved',)
         depth = 1
         

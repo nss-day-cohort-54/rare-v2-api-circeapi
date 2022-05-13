@@ -10,4 +10,6 @@ class Post(models.Model):
     content = models.TextField()
     publication_date = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
+    image_url = models.URLField()
+    approved = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="posttag")
