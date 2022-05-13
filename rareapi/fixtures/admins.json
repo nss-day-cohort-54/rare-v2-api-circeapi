@@ -1,0 +1,20 @@
+[
+    {
+        "model": "rareapi.admin",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "avatar": "",
+            "is_staff": 1
+        }
+    },
+    {
+        "model": "rareapi.admin",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "avatar": "",
+            "is_staff": 1
+        }
+    }
+]    
