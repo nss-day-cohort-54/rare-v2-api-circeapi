@@ -44,7 +44,7 @@ class PostUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'username']
 
 
 class PostAuthorSerializer(serializers.ModelSerializer):
@@ -69,5 +69,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category')
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category',)
+        depth = 1
         
