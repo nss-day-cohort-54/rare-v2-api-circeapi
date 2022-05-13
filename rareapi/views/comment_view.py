@@ -32,6 +32,7 @@ class CommentView(ViewSet):
         """
         author = Author.objects.get(user=request.auth.user)
         comment = Comment.objects.create(
+            subject = request.data['subject'],
             content = request.data['content'],
             author = author,
             post_id = request.data['post_id']
@@ -70,9 +71,9 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Comment
-        fields = ('id', 'content', 'created_on', 'author_id', 'post_id')
+        fields = ('id', 'content', 'created_on', 'author_id', 'post_id', 'subject')
 # validates and saves new game
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['content', 'post']
+        fields = ['content', 'post', 'subject']
