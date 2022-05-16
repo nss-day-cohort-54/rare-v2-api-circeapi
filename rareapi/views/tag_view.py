@@ -27,8 +27,7 @@ class TagView(ViewSet):
         Returns:
             Response -- JSON serialized list of tags
         """
-        tags = Tag.objects.all()
-        
+        tags = Tag.objects.all().order_by('label')
         serializer = TagSerializer(tags, many=True)
         return Response(serializer.data)
     
@@ -45,6 +44,11 @@ class TagView(ViewSet):
         serializer = TagSerializer(tag)
         return Response(serializer.data)
     
+    def destroy(self, request, pk):
+        tag = Tag.objects.get(pk=pk)
+        tag.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
 class TagSerializer(serializers.ModelSerializer):
     """JSON serializer for Tags"""
     class Meta:
