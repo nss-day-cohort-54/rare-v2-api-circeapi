@@ -84,6 +84,7 @@ class PostView(ViewSet):
         post.image_url = request.data["image_url"]
         post.approved = request.data["approved"]
         post.save()
+        post.tags.add(*request.data['tags'])
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)     
         
