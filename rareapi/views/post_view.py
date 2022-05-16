@@ -40,6 +40,11 @@ class PostView(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
         
+    def destroy(self, request, pk):
+        post = Post.objects.get(pk=pk)
+        post.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
         
         
     def create(self, request):
@@ -71,7 +76,7 @@ class PostView(ViewSet):
         response_message = ""
         
         post = Post.objects.get(pk=pk)
-        tag = request.data['tag']
+        tag = request.data['tag_id']
         
         if request.method == "POST":
             post.tags.add(tag)
