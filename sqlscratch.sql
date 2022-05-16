@@ -3,7 +3,7 @@ DELETE FROM rareapi_comment;
 
 UPDATE auth_user
 SET is_staff = 1
-WHERE id = 2
+WHERE id = 1
 
 INSERT INTO rareapi_admin 
 ('id', 'user_id', 'avatar')
