@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models.functions import Coalesce
@@ -8,7 +9,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from datetime import datetime
-from rareapi.models import Post, Author, Category
+from rareapi.models import Post, Author, Category, Comment
 
 class PostView(ViewSet):
     
@@ -104,16 +105,25 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'label')        
+        fields = ('id', 'label')    
+        
+        
+class CommentSerializer(serializers.ModelSerializer):
+
+    author = PostAuthorSerializer(many=False)
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'author', 'subject', 'content', 'created_on')           
 
         
 class PostSerializer(serializers.ModelSerializer):
     
     author = PostAuthorSerializer(many=False)
     category = CategorySerializer(many=False)
+    comments = CommentSerializer(many=True)
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved',)
-        depth = 1
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved', 'comments', )
         
