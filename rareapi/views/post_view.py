@@ -68,7 +68,24 @@ class PostView(ViewSet):
             serializer = PostSerializer(post, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
-            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)    
+            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)   
+        
+        
+    def update(self, request, pk=None):
+
+        user = Author.objects.get(user=request.auth.user)
+        category = Category.objects.get(pk=request.data["category"])
+
+        post = Post.objects.get(pk=pk)
+        post.author = user
+        post.title = request.data["title"]
+        post.content = request.data["content"]
+        post.category = category
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+        post.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)     
         
     @action(methods=['post', 'delete'], detail=True)
     def tag(self, request, pk):
