@@ -10,9 +10,8 @@ from rareapi.models import Author
 class AuthorView(ViewSet):
     
     def list(self, request):
-        author = Author.objects.get(user=request.auth.user)
-        
-        serializer = AuthorSerializer(author)
+        author = Author.objects.all().order_by('-user')
+        serializer = AuthorSerializer(author, many=True)
         return Response(serializer.data)
 
 class AuthorSerializer(serializers.ModelSerializer):

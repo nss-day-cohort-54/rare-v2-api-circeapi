@@ -21,3 +21,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'is_staff')
         depth = 1
+        
