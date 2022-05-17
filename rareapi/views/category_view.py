@@ -13,7 +13,6 @@ class CategoryView(ViewSet):
         Returns:
             Response -- JSON serialized category
         """
-        
         try:
             category = Category.objects.get(pk=pk)
             serializer = CategorySerializer(category)
@@ -28,7 +27,6 @@ class CategoryView(ViewSet):
             Response -- JSON serialized list of categories
         """
         categories = Category.objects.all().order_by('label')
-        
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
     
@@ -45,6 +43,23 @@ class CategoryView(ViewSet):
         serializer = CategorySerializer(category)
         return Response(serializer.data)
     
+    def update(self, request, pk):
+        """Handle PUT requests for a game
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        category = Category.objects.get(pk=pk)
+        serializer = CategorySerializer(category, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    def destroy(self, request, pk):
+        category = Category.objects.get(pk=pk)
+        category.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for Categories"""
     class Meta:
