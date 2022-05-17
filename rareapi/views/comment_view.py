@@ -3,9 +3,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareapi.models.author import Author
-
+from django.contrib.auth.models import User
 from rareapi.models.comment import Comment
 from rareapi.models.post import Post
+
 
 class CommentView(ViewSet):
     """Level up game comments"""
@@ -44,6 +45,9 @@ class CommentView(ViewSet):
     # list handles queries
     def list(self, request):
         comments = Comment.objects.all()
+        post = request.query_params.get('post', None)
+        if post is not None:
+            comments = comments.filter(post_id=post)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
     
@@ -65,13 +69,33 @@ class CommentView(ViewSet):
         comment.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
         
+        
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username']
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    class Meta:
+        model = Author
+        fields = ['id', 'user']
 
 class CommentSerializer(serializers.ModelSerializer):
     """JSON serializer for game types
     """
+    
+    author = AuthorSerializer(many=False)
+    
     class Meta:
+        
         model = Comment
-        fields = ('id', 'content', 'created_on', 'author_id', 'post_id', 'subject')
+        fields = ('id', 'content', 'created_on', 'author', 'subject', 'post')
+        depth = 2
 # validates and saves new game
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models.functions import Coalesce
@@ -9,6 +8,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from datetime import datetime
+from rest_framework.decorators import action
 from rareapi.models import Post, Author, Category, Comment
 
 class PostView(ViewSet):
@@ -60,9 +60,11 @@ class PostView(ViewSet):
         post.category = category
         post.image_url = request.data["image_url"]
         post.approved = request.data["approved"]
+        
 
         try:
             post.save()
+            post.tags.add(*request.data['tags'])
             serializer = PostSerializer(post, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
@@ -82,9 +84,26 @@ class PostView(ViewSet):
         post.image_url = request.data["image_url"]
         post.approved = request.data["approved"]
         post.save()
+        post.tags.add(*request.data['tags'])
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)     
         
+    @action(methods=['post', 'delete'], detail=True)
+    def tag(self, request, pk):
+        """Post and Delete requests to add tags to a post"""
+        response_message = ""
+        
+        post = Post.objects.get(pk=pk)
+        tag = request.data['tag_id']
+        
+        if request.method == "POST":
+            post.tags.add(tag)
+            response_message = Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
+        elif request.method == 'DELETE':
+            post.tags.remove(tag)
+            response_message = Response({'message': 'Tag deleted'}, status=status.HTTP_204_NO_CONTENT)
+        
+        return response_message
 
 class PostUserSerializer(serializers.ModelSerializer):
 
@@ -125,5 +144,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved', 'comments', )
+        fields = ('id', 'author', 'title', 'content', 'publication_date', 'category', 'image_url', 'approved', 'comments', 'tags' )
+        depth = 1
         
