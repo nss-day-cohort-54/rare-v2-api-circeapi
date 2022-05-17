@@ -19,6 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
     class Meta:
         model = User
-        fields = ('id', 'is_staff')
+        fields = ('id', 'is_staff', 'username')
         depth = 1
         
