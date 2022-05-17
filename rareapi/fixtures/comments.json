@@ -5,6 +5,7 @@
         "fields": {
             "post": 1,
             "author": 1,
+            "subject": "Rave Review",
             "content": "This game rocked my socks clean off mybruhbruh",
             "created_on": "2020-08-29T13:24:27.172Z"
         }
@@ -15,7 +16,19 @@
         "fields": {
             "post": 1,
             "author": 1,
+            "subject": "The worst",
             "content": "I would rather sit in a puddle and cry than play this game",
+            "created_on": "2020-07-29T13:24:27.172Z"
+        }
+    },
+    {
+        "model": "rareapi.comment",
+        "pk": 3,
+        "fields": {
+            "post": 5,
+            "author": 1,
+            "subject": "Off topic",
+            "content": "It's taco Tuesday!",
             "created_on": "2020-07-29T13:24:27.172Z"
         }
     }
