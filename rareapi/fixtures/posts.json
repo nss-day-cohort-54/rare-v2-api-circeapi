@@ -32,7 +32,7 @@
             "title": "The Third Post",
             "content": "This is some content for my third post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
-            "author": 5,
+            "author": 4,
             "category": 1,
             "image_url": "https://www.seekpng.com/png/detail/65-654254_pikachu-clipart-character-pokemon-cute-borders-vectors-pokemon.png",
             "approved": 1
@@ -45,7 +45,7 @@
             "title": "The Fourth Post",
             "content": "This is some content for my fourth post to test.",
             "publication_date": "2022-01-15T20:00:42.874Z",
-            "author": 5,
+            "author": 4,
             "category": 1,
             "image_url": "https://i.insider.com/57910997dd0895a56e8b4570?width=600&format=jpeg&auto=webp",
             "approved": 1
@@ -58,7 +58,7 @@
             "title": "The Fifth Post",
             "content": "This is some content for my fifth post to test.",
             "publication_date": "2022-02-15T20:00:42.874Z",
-            "author": 5,
+            "author": 4,
             "category": 1,
             "image_url": "https://www.seekpng.com/png/detail/183-1834872_yahoo-image-search-results-pokemon-characters.png",
             "approved": 1
