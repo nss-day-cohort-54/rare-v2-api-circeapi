@@ -18,3 +18,14 @@ INSERT INTO rareapi_category
 ('id', 'label')
 VALUES (3,'zabra')
 
+UPDATE auth_user
+SET is_staff = 1
+WHERE id = 5
+
+UPDATE rareapi_author
+SET user_id = 2
+WHERE id = 2
+
+UPDATE rareapi_author
+SET user_id = 5
+WHERE id = 5
