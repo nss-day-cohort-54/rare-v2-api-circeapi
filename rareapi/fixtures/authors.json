@@ -27,7 +27,7 @@
         "model": "rareapi.author",
         "pk": 5,
         "fields": {
-            "user": 2,
+            "user": 3,
             "avatar": ""
         }
     }
