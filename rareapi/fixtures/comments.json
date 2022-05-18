@@ -31,6 +31,17 @@
             "content": "It's taco Tuesday!",
             "created_on": "2020-07-29T13:24:27.172Z"
         }
+    },
+    {
+        "model": "rareapi.comment",
+        "pk": 4,
+        "fields": {
+            "post": 1,
+            "author": 5,
+            "subject": "Stinker",
+            "content": "This is some questionable content...",
+            "created_on": "2020-08-29T13:24:27.172Z"
+        }
     }
     
 ]
