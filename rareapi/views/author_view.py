@@ -9,6 +9,19 @@ from rareapi.models import Author
 
 class AuthorView(ViewSet):
     
+    def retrieve(self, request, pk):
+        """Handle GET requests for single category
+        
+        Returns:
+            Response -- JSON serialized category
+        """
+        try:
+            author = Author.objects.get(pk=pk)
+            serializer = AuthorSerializer(author)
+            return Response(serializer.data)
+        except Author.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        
     def list(self, request):
         author = Author.objects.all().order_by('user')
         serializer = AuthorSerializer(author, many=True)
