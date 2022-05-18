@@ -14,11 +14,32 @@ class UserView(ViewSet):
         
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
 
+        try:
+            user = User.objects.get(pk=pk)
+            serializer = UserSerializer(user, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
+        
+    def update(self, request, pk):
+        """Handle PUT requests for a user
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        user = User.objects.get(pk=pk)
+        serializer = UserSerializer(user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
 class UserSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
     class Meta:
         model = User
-        fields = ('id', 'is_staff', 'username')
+        fields = ('id', 'is_staff', 'username', 'is_active')
         depth = 1
         
