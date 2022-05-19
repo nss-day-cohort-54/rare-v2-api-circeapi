@@ -1,9 +1,9 @@
 DELETE FROM rareapi_post;
 DELETE FROM rareapi_comment;
 
-UPDATE auth_user
-SET is_staff = 0
-WHERE id = 2
+UPDATE rareapi_post
+SET author_id = 1
+WHERE id = 1
 
 INSERT INTO rareapi_admin 
 ('id', 'user_id', 'avatar')
