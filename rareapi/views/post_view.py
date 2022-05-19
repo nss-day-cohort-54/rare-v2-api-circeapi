@@ -18,14 +18,21 @@ class PostView(ViewSet):
 
         user_id = self.request.query_params.get("user_id", None)
         category = self.request.query_params.get("category", None)
+        tag = self.request.query_params.get("tag", None)
+        title = self.request.query_params.get("title", None)
+        
 
-        if user_id == None and category == None: 
+        if user_id != None: 
+            posts = Post.objects.filter(Q(author = user_id)).order_by('-publication_date')
+        elif category != None:
+            posts = Post.objects.filter(Q(category=category)).order_by('-publication_date')
+        elif tag != None:
+            posts = Post.objects.filter(Q(tags = tag)).order_by('-publication_date')
+        elif title != None:
+            posts = Post.objects.filter(Q(title__contains = title)).order_by('-publication_date')
+        else:   
             posts = Post.objects.all().order_by('-publication_date')
-        else :    
-            posts = Post.objects.filter(
-                Q(author = user_id) |
-                Q(category=category)).order_by('-publication_date')
-                
+
         
                 
         
