@@ -1,3 +1,4 @@
+from urllib import response
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models.functions import Coalesce
@@ -73,11 +74,11 @@ class PostView(ViewSet):
         
     def update(self, request, pk=None):
 
-        user = Author.objects.get(user=request.auth.user)
+        
         category = Category.objects.get(pk=request.data["category"])
 
         post = Post.objects.get(pk=pk)
-        post.author = user
+        # post.author = request.data['author']
         post.title = request.data["title"]
         post.content = request.data["content"]
         post.category = category
@@ -87,6 +88,17 @@ class PostView(ViewSet):
         post.tags.add(*request.data['tags'])
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)     
+        
+        
+    @action(methods=['put'], detail=True)
+    def approve(self,request, pk):
+        response_message = ""
+        
+        post = Post.objects.get(pk=pk)
+        post.approved = 1
+        
+        
+        
         
     @action(methods=['post', 'delete'], detail=True)
     def tag(self, request, pk):
