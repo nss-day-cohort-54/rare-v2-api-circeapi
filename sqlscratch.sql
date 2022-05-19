@@ -2,8 +2,8 @@ DELETE FROM rareapi_post;
 DELETE FROM rareapi_comment;
 
 UPDATE rareapi_post
-SET author_id = 1
-WHERE id = 1
+SET approved = 0
+WHERE id = 4
 
 INSERT INTO rareapi_admin 
 ('id', 'user_id', 'avatar')
