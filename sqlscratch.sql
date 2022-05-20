@@ -29,3 +29,5 @@ WHERE id = 2
 UPDATE rareapi_author
 SET user_id = 5
 WHERE id = 5
+
+DELETE rareapi_subscription

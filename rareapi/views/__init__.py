@@ -8,3 +8,4 @@ from .comment_view import CommentView
 from .author_view import AuthorView
 from .user_view import UserView
 from .admin_view import AdminView
+from .subscription_view import SubscriptionView

@@ -22,6 +22,7 @@ from django.conf.urls import include
 from rest_framework import routers
 from rareapi.views import register_user, login_user, PostView, CategoryView, CommentView, TagView, AuthorView, UserView
 from rareapi.views.admin_view import AdminView
+from rareapi.views.subscription_view import SubscriptionView
 
 router = routers.DefaultRouter(trailing_slash=False)
 
@@ -32,6 +33,7 @@ router.register(r'tags', TagView, 'tag')
 router.register(r'authors', AuthorView, 'author')
 router.register(r'users', UserView, 'user')
 router.register(r'admins', AdminView, 'admin')
+router.register(r'subscriptions', SubscriptionView, 'subs')
 
 
 urlpatterns = [
