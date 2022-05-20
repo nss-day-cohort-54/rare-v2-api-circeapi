@@ -33,3 +33,4 @@ WHERE id = 5
 UPDATE rareapi_post
 SET approved = 0
 WHERE id = 3
+DELETE rareapi_subscription

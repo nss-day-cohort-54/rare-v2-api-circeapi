@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to="avatarimages")
     
 # @property
 # def post_count(self):
@@ -16,3 +15,15 @@ class Author(models.Model):
 #     if len(postCount) > 0:
 #         post_count = len(postCount)  
 #         return post_count
+# from .photo import Photo
+# from rareapi.views.photo import PhotoSerializer
+
+
+    
+    # @property
+    # def profileImageUrl(self):
+    #     """profile image for user"""
+    #     photo = PhotoSerializer(Photo.objects.filter(author = self).last())
+    #     return photo
+        
+        
