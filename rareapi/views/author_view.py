@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareapi.models import Author
-
+from rest_framework.decorators import action
 
 class AuthorView(ViewSet):
     
@@ -26,6 +26,9 @@ class AuthorView(ViewSet):
         author = Author.objects.all().order_by('user')
         serializer = AuthorSerializer(author, many=True)
         return Response(serializer.data)
+    
+    
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
