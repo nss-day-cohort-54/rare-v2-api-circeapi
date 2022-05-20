@@ -4,8 +4,11 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Author
-from rest_framework.decorators import action
+from rareapi.models import Author, Photo
+from django.contrib.auth.models import User
+
+from rareapi.views.photo import PhotoSerializer 
+
 
 class AuthorView(ViewSet):
     
@@ -32,7 +35,15 @@ class AuthorView(ViewSet):
 
 class AuthorSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
+    
+    profileImageUrl = serializers.SerializerMethodField()
+    def get_profileImageUrl(self, obj):
+        photo = PhotoSerializer(Photo.objects.filter(author = obj).last())
+        return photo.data
+    
+    
+    
     class Meta:
         model = Author
-        fields = ('id', 'user')
+        fields = ('id', 'user', 'profileImageUrl')
         depth = 1
