@@ -29,6 +29,9 @@ class AuthorView(ViewSet):
         author = Author.objects.all().order_by('user')
         serializer = AuthorSerializer(author, many=True)
         return Response(serializer.data)
+    
+    
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""

@@ -9,3 +9,4 @@ from .comment_view import CommentView
 from .user_view import UserView
 from .admin_view import AdminView
 from .category_view import CategoryView
+from .subscription_view import SubscriptionView
