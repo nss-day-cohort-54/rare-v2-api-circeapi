@@ -23,8 +23,8 @@ SET is_staff = 1
 WHERE id = 5
 
 UPDATE rareapi_author
-SET user_id = 2
-WHERE id = 2
+SET user_id = 3
+WHERE id = 3
 
 UPDATE rareapi_author
 SET user_id = 5

@@ -27,14 +27,14 @@ class AuthorView(ViewSet):
             
             # # for post count
             # posts_by_user = Post.objects.filter(author_id=pk)
-            Author.objects.annotate(post_count=Count('posts', distinct=True))
+            # posts_by_user = Author.objects.annotate(post_count=Count('posts', distinct=True))
             
             # posts_by_user[0].post_count
             
             serializer = AuthorSerializer(author)
             
             # # create a copy of serializer.data
-            serializer.data = serializer.data
+            # serializer.data["postCount"] = posts_by_user
 
             # # add a property (w/o modify class, or add a custom property to class)
             # serializer_data["postCount"] = len(posts_by_user)
@@ -52,8 +52,13 @@ class AuthorView(ViewSet):
 
 class AuthorSerializer(serializers.ModelSerializer):
     """JSON serializer for reviews"""
+    
+    post_count = serializers.SerializerMethodField()
+    def get_post_count(self, obj):
+        count = len(Post.objects.filter(author_id=obj))
+        return count
         
     class Meta:
         model = Author
-        fields = ('id', 'user', )
+        fields = ('id', 'user', 'post_count')
         depth = 1
